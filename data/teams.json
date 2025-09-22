@@ -47,5 +47,18 @@
       "analytics-lead@company.com"
     ],
     "createdAt": "2025-09-22T00:16:22.027Z"
+  },
+  {
+    "id": "mfudpech246lxameuwti",
+    "name": "DevOps",
+    "description": "Infrastructure and deployment team",
+    "executives": [
+      "cto@company.com"
+    ],
+    "projectLeads": [
+      "devops-lead@company.com",
+      "infrastructure-lead@company.com"
+    ],
+    "createdAt": "2025-09-22T00:19:10.433Z"
   }
 ]
