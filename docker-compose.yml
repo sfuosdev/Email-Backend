@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  email-backend:
+    build: .
+    container_name: email-backend
+    ports:
+      - "3000:3000"
+    environment:
+      # Server Configuration
+      - PORT=3000
+      - APP_NAME=Executive Hiring Notification System
+      
+      # Email Configuration (configure these for production)
+      # - EMAIL_HOST=smtp.gmail.com
+      # - EMAIL_PORT=587
+      # - EMAIL_USER=your-email@gmail.com
+      # - EMAIL_PASS=your-app-password
+      
+    volumes:
+      # Persist data directory for JSON storage
+      - ./data:/app/data
+      # Optional: Mount custom configuration
+      # - ./config:/app/config
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    labels:
+      - "com.sfuosdev.service=email-backend"
+      - "com.sfuosdev.version=1.0.0"
+      - "com.sfuosdev.description=Executive Hiring Email Notification System"
+
+# Optional: Add nginx reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    container_name: email-backend-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # - ./ssl:/etc/nginx/ssl:ro  # Uncomment for SSL certificates
+    depends_on:
+      - email-backend
+    restart: unless-stopped
+    profiles:
+      - production
+
+# Optional: Add monitoring with Prometheus and Grafana
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: email-backend-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: email-backend-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+volumes:
+  grafana-data:
+
+networks:
+  default:
+    name: email-backend-network

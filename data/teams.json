@@ -1,64 +1,25 @@
-[
-  {
-    "id": "engineering",
-    "name": "Engineering",
-    "description": "Software development and technical roles",
-    "executives": [
-      "cto@company.com"
-    ],
-    "projectLeads": [
-      "eng-lead@company.com"
-    ],
-    "createdAt": "2025-09-22T00:11:57.322Z"
-  },
-  {
-    "id": "product",
-    "name": "Product",
-    "description": "Product management and design roles",
-    "executives": [
-      "cpo@company.com"
-    ],
-    "projectLeads": [
-      "product-lead@company.com"
-    ],
-    "createdAt": "2025-09-22T00:11:57.322Z"
-  },
-  {
-    "id": "marketing",
-    "name": "Marketing",
-    "description": "Marketing and growth roles",
-    "executives": [
-      "cmo@company.com"
-    ],
-    "projectLeads": [
-      "marketing-lead@company.com"
-    ],
-    "createdAt": "2025-09-22T00:11:57.322Z"
-  },
-  {
-    "id": "mfudlsejt3id23x2dym",
-    "name": "Data Science",
-    "description": "Data science and analytics team",
-    "executives": [
-      "cdo@company.com"
-    ],
-    "projectLeads": [
-      "data-lead@company.com",
-      "analytics-lead@company.com"
-    ],
-    "createdAt": "2025-09-22T00:16:22.027Z"
-  },
-  {
-    "id": "mfudpech246lxameuwti",
-    "name": "DevOps",
-    "description": "Infrastructure and deployment team",
-    "executives": [
-      "cto@company.com"
-    ],
-    "projectLeads": [
-      "devops-lead@company.com",
-      "infrastructure-lead@company.com"
-    ],
-    "createdAt": "2025-09-22T00:19:10.433Z"
-  }
-]
+[ {
+  "id" : "engineering",
+  "name" : "Engineering",
+  "description" : "Software development and technical roles",
+  "executives" : [ "cto@company.com" ],
+  "projectLeads" : [ "eng-lead@company.com" ],
+  "createdAt" : "2025-09-22T00:35:44",
+  "allNotificationEmails" : [ "cto@company.com", "eng-lead@company.com" ]
+}, {
+  "id" : "product",
+  "name" : "Product",
+  "description" : "Product management and design roles",
+  "executives" : [ "cpo@company.com" ],
+  "projectLeads" : [ "product-lead@company.com" ],
+  "createdAt" : "2025-09-22T00:35:44",
+  "allNotificationEmails" : [ "cpo@company.com", "product-lead@company.com" ]
+}, {
+  "id" : "marketing",
+  "name" : "Marketing",
+  "description" : "Marketing and growth roles",
+  "executives" : [ "cmo@company.com" ],
+  "projectLeads" : [ "marketing-lead@company.com" ],
+  "createdAt" : "2025-09-22T00:35:44",
+  "allNotificationEmails" : [ "cmo@company.com", "marketing-lead@company.com" ]
+} ]

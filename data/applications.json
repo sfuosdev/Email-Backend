@@ -1,66 +1,11 @@
-[
-  {
-    "id": "mfudkrnfy4ouj7erm18",
-    "applicantName": "John Doe",
-    "applicantEmail": "john@example.com",
-    "position": "Senior Software Engineer",
-    "team": "Engineering",
-    "resumeUrl": "https://example.com/resume.pdf",
-    "coverLetter": "I am excited to apply for this position and believe my experience in full-stack development would be valuable to your team.",
-    "appliedAt": "2025-09-22T00:15:34.395Z",
-    "status": "pending"
-  },
-  {
-    "id": "mfudlgi4z6nn9ag2e2k",
-    "applicantName": "Jane Smith",
-    "applicantEmail": "jane@example.com",
-    "position": "Product Manager",
-    "team": "Product",
-    "coverLetter": "I have 5 years of experience in product management and am passionate about building user-centric products.",
-    "appliedAt": "2025-09-22T00:16:06.604Z",
-    "status": "pending"
-  },
-  {
-    "id": "mfudlzhcf4vmuzsq51",
-    "applicantName": "Alice Johnson",
-    "applicantEmail": "alice@example.com",
-    "position": "Senior Data Scientist",
-    "team": "Data Science",
-    "resumeUrl": "https://example.com/alice-resume.pdf",
-    "coverLetter": "I have extensive experience in machine learning and statistical analysis, with a PhD in Statistics and 3 years at a leading tech company.",
-    "appliedAt": "2025-09-22T00:16:31.200Z",
-    "status": "pending"
-  },
-  {
-    "id": "mfudpebmzfrn9fb0leq",
-    "applicantName": "Sarah Chen",
-    "applicantEmail": "sarah.chen@example.com",
-    "position": "Senior Full Stack Developer",
-    "team": "Engineering",
-    "resumeUrl": "https://example.com/sarah-resume.pdf",
-    "coverLetter": "I have 6 years of experience in React, Node.js, and cloud technologies. I am passionate about building scalable web applications and leading technical initiatives.",
-    "appliedAt": "2025-09-22T00:19:10.402Z",
-    "status": "pending"
-  },
-  {
-    "id": "mfudpec5dscpafxqtxi",
-    "applicantName": "Michael Rodriguez",
-    "applicantEmail": "michael.r@example.com",
-    "position": "Senior Product Manager",
-    "team": "Product",
-    "coverLetter": "With 8 years in product management at high-growth startups, I specialize in user research, roadmap planning, and cross-functional team leadership.",
-    "appliedAt": "2025-09-22T00:19:10.421Z",
-    "status": "pending"
-  },
-  {
-    "id": "mfudpecaqrsyn8vxdah",
-    "applicantName": "Jennifer Kim",
-    "applicantEmail": "jennifer.kim@example.com",
-    "position": "Digital Marketing Manager",
-    "team": "Marketing",
-    "resumeUrl": "https://example.com/jennifer-resume.pdf",
-    "coverLetter": "I have successfully led digital marketing campaigns that increased user acquisition by 300% and managed marketing budgets of $2M+.",
-    "appliedAt": "2025-09-22T00:19:10.426Z",
-    "status": "pending"
-  }
-]
+[ {
+  "id" : "mfueb93x143c8dfd",
+  "applicantName" : "John Doe",
+  "applicantEmail" : "john@example.com",
+  "position" : "Senior Software Engineer",
+  "team" : "Engineering",
+  "resumeUrl" : "https://example.com/resume.pdf",
+  "coverLetter" : "I am excited to apply for this position and bring my Spring Boot expertise to your team.",
+  "appliedAt" : "2025-09-22T00:36:10",
+  "status" : "pending"
+} ]
