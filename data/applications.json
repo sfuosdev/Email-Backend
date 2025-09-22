@@ -1,0 +1,34 @@
+[
+  {
+    "id": "mfudkrnfy4ouj7erm18",
+    "applicantName": "John Doe",
+    "applicantEmail": "john@example.com",
+    "position": "Senior Software Engineer",
+    "team": "Engineering",
+    "resumeUrl": "https://example.com/resume.pdf",
+    "coverLetter": "I am excited to apply for this position and believe my experience in full-stack development would be valuable to your team.",
+    "appliedAt": "2025-09-22T00:15:34.395Z",
+    "status": "pending"
+  },
+  {
+    "id": "mfudlgi4z6nn9ag2e2k",
+    "applicantName": "Jane Smith",
+    "applicantEmail": "jane@example.com",
+    "position": "Product Manager",
+    "team": "Product",
+    "coverLetter": "I have 5 years of experience in product management and am passionate about building user-centric products.",
+    "appliedAt": "2025-09-22T00:16:06.604Z",
+    "status": "pending"
+  },
+  {
+    "id": "mfudlzhcf4vmuzsq51",
+    "applicantName": "Alice Johnson",
+    "applicantEmail": "alice@example.com",
+    "position": "Senior Data Scientist",
+    "team": "Data Science",
+    "resumeUrl": "https://example.com/alice-resume.pdf",
+    "coverLetter": "I have extensive experience in machine learning and statistical analysis, with a PhD in Statistics and 3 years at a leading tech company.",
+    "appliedAt": "2025-09-22T00:16:31.200Z",
+    "status": "pending"
+  }
+]
