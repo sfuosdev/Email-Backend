@@ -10,16 +10,18 @@ public class ExecFormRequest {
     private String email;
     private Integer studentId;
     private Integer yearOfStudy;
+    private String faculty;
     private String major;
     private Boolean isCoop = false;   // isCoop is false by default
     private TeamType teamType;
     private Map<String, String> questionsList;
 
-    public ExecFormRequest(String name, String email, Integer sid, Integer yearOfStudy, String major, String teamType) {
+    public ExecFormRequest(String name, String email, Integer sid, Integer yearOfStudy, String faculty, String major, String teamType) {
         this.fullName = name;
         this.email = email;
         this.studentId = sid;
         this.yearOfStudy = yearOfStudy;
+        this.faculty = faculty;
         this.major = major;
         this.teamType = TeamType.getTeamType(teamType);
         this.questionsList = new HashMap<>();
@@ -40,6 +42,10 @@ public class ExecFormRequest {
 
     public Integer getYearOfStudy() {
         return this.yearOfStudy;
+    }
+
+    public String getFaculty() {
+        return this.faculty;
     }
 
     public String getMajor() {
@@ -63,5 +69,8 @@ public class ExecFormRequest {
         this.isCoop = true;
     }
 
+    public void setQuestionsList(Map<String, String> questions) {
+        this.questionsList = questions;
+    }
 
 }
