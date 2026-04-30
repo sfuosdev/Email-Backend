@@ -1,0 +1,41 @@
+name: Website Update Template
+description: Template for updating the website content
+title: "[Update]: "
+labels: ["update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to update the website content. Please provide details about the changes you are making such as adding new events, updating existing information, or improving the layout.
+
+  - type: input
+    id: update-title
+    attributes:
+      label: Update Title
+      description: Provide a concise title for the update you are making.
+      placeholder: e.g., Add new event for Spring 2024
+    validations:
+      required: true
+
+  - type: dropdown
+    id: update-section
+    attributes:
+      label: Section to Update
+      description: Select the section of the website you are updating.
+      options:
+        - "About Us"
+        - "Projects"
+        - "Events"
+        - "Teams"
+        - "Resources"
+    validations:
+      required: true
+
+  - type: textarea
+    id: update-description
+    attributes:
+      label: Update Description
+      description: Describe the changes you are making to the website content.
+      placeholder: I am updating the Events section to add a new event for Spring 2024
+    validations:
+      required: true

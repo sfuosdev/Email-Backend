@@ -1,0 +1,9 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://sfuosdev.github.io/Docs/
+    about: Check our documentation and contributing guide for help and guidelines on how to contribute to the project.
+  - name: Discord
+    url: https://discord.gg/Y3bZKpwBkj
+    about: Join our Discord server to ask questions, get help, and discuss the project with the community.
