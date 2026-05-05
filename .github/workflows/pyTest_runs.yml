@@ -24,11 +24,10 @@ jobs:
       # This checks out the code from the repository so that it can be tested 'actions/checkout@v3'
       - uses: actions/checkout@v3
         
-      - name: Set up Python 3.8
-      # Similarly here, I set up Python 3.8 using the setup-python action
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: 3.8
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
