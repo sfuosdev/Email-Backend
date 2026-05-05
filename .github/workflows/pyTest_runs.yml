@@ -6,6 +6,7 @@ on:
     # Only Operate on the main branch
     branches:
       - main
+      - issue-4/configuring-ci-cd-pytest
     # Ignore changes to the README and the workflow file
     paths-ignore:
       - 'README.md'
