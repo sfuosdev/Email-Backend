@@ -10,7 +10,7 @@ on:
     # Ignore changes to the README and the workflow file
     paths-ignore:
       - 'README.md'
-      - '.github/workflows/pyTest_runs.yml'
+      # - '.github/workflows/pyTest_runs.yml'
 
 # This workflow will run pytest on the codebase and upload the results as an artifact
 jobs:
