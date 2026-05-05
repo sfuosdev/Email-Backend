@@ -15,11 +15,9 @@ def test_submit_exec_form_success():
         "yearOfStudy": "3",
         "faculty": "Engineering",
         "major": "Computer Science",
-        "coopTerm": "no",
-        "firstChoiceTeam": "development",
+        "isCoop": "no",
+        "teamType": "EVENT",
         "questions": {
-            "dev_q1": "Answer 1",
-            "dev_q2": "Answer 2"
         }
     }
 
@@ -41,8 +39,8 @@ def test_submit_exec_form_invalid_student_id():
         "yearOfStudy": "2",
         "faculty": "Science",
         "major": "Biology",
-        "coopTerm": "no",
-        "firstChoiceTeam": "design",
+        "isCoop": "no",
+        "teamType": "design",
         "questions": {}
     }
 
@@ -63,8 +61,8 @@ def test_submit_exec_form_coop_term():
         "yearOfStudy": "4",
         "faculty": "Arts",
         "major": "Psychology",
-        "coopTerm": "yes",
-        "firstChoiceTeam": "marketing",
+        "isCoop": "yes",
+        "teamType": "marketing",
         "questions": {}
     }
 
@@ -85,8 +83,8 @@ def test_submit_exec_form_invalid_team():
         "yearOfStudy": "1",
         "faculty": "Business",
         "major": "Finance",
-        "coopTerm": "no",
-        "firstChoiceTeam": "invalid_team",
+        "isCoop": "no",
+        "teamType": "invalid_team",
         "questions": {}
     }
 
