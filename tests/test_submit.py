@@ -94,3 +94,23 @@ def test_submit_exec_form_invalid_team():
     data = response.json()
     assert "message" in data
     assert "Invalid team type" in data["message"]
+
+def test_submit_exec_form_missing_fields():
+    # Test for when one component is missing
+    test_data = {
+        "fullName": "Charlie Brown",
+        "email": "charlie.brown@example.com",
+        "studentId": "330102020",
+        "yearOfStudy": "1",
+        "faculty": "  ",
+        "major": "Finance",
+        "coopTerm": "no",
+        "firstChoiceTeam": "STRATEGY",
+        "questions": {}
+    }
+
+    response = client.post("/api/submit/exec-form", json=test_data)
+    assert response.status_code == 400
+    data = response.json()
+    assert "message" in data
+    assert "Missing required fields" in data["message"]
