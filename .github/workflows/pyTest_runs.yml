@@ -3,14 +3,27 @@ run-name: ${{ github.actor }}
 
 on:
   push:
-    # Only Operate on the main branch
     branches:
       - main
       - issue-4/configuring-ci-cd-pytest
+      - develop
+    
     # Ignore changes to the README and the workflow file
     paths-ignore:
       - 'README.md'
       # - '.github/workflows/pyTest_runs.yml'
+
+  pull_request:
+    branches:
+      - main
+      - issue-4/configuring-ci-cd-pytest
+      - develop
+    
+    # Ignore changes to the README and the workflow file
+    paths-ignore:
+      - 'README.md'
+  schedule:
+    - cron: '0 0 * * 0' # Every Sunday at midnight
 
 # This workflow will run pytest on the codebase and upload the results as an artifact
 jobs:
@@ -34,7 +47,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
+          pip install pytest pytest-cov
 
+      - name: Run tests with coverage
+        run: |
+          python -m pytest tests/test_submit.py \
+            --junitxml=results.xml \
+            --cov=core --cov=models --cov=routers --cov=enums \
+            --cov-report=xml --cov-report=html --cov-report=term-missing \
+            --cov-fail-under=80
 
       - name: Run tests
         run: |
