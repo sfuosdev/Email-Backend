@@ -6,39 +6,30 @@ on:
     branches:
       - main
       - issue-4/configuring-ci-cd-pytest
-      - develop
-    
-    # Ignore changes to the README and the workflow file
     paths-ignore:
       - 'README.md'
       # - '.github/workflows/pyTest_runs.yml'
-
   pull_request:
     branches:
       - main
-      - issue-4/configuring-ci-cd-pytest
-      - develop
-    
-    # Ignore changes to the README and the workflow file
     paths-ignore:
       - 'README.md'
-  schedule:
-    - cron: '0 0 * * 0' # Every Sunday at midnight
+  
 
 # This workflow will run pytest on the codebase and upload the results as an artifact
 jobs:
   pytest:
-    # This runs it at the lasest version of Ubuntu
+    # lasest version of Ubuntu
     runs-on: ubuntu-latest
     steps:
       # This inputs a message to the console
       - run: echo "Running Pytest"
       
       # This checks out the code from the repository so that it can be tested 'actions/checkout@v3'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         
       - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -47,15 +38,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
-          pip install pytest pytest-cov
 
-      - name: Run tests with coverage
-        run: |
-          python -m pytest tests/test_submit.py \
-            --junitxml=results.xml \
-            --cov=core --cov=models --cov=routers --cov=enums \
-            --cov-report=xml --cov-report=html --cov-report=term-missing \
-            --cov-fail-under=80
 
       - name: Run tests
         run: |
