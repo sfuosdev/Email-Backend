@@ -45,6 +45,17 @@ async def receive_exec_form(form_dto: ExecAppFormDTO):
         teamType=team_type,
     )
 
+    required_fields = [
+        form_dto.fullName,
+        form_dto.email,
+        student_id,
+        year_of_study,
+        form_dto.faculty,
+        form_dto.major,
+        is_coop,
+        team_type
+    ]
+
     processed_questions: Dict[str, str] = {}
 
     if form_dto.questions:
@@ -73,6 +84,16 @@ async def receive_exec_form(form_dto: ExecAppFormDTO):
             ).model_dump(mode="json"),
         )
     
+    if any(not field for field in required_fields):
+        for field in required_fields:
+            if field is None or (isinstance(field, str) and field.strip() == ""):
+                return JSONResponse(
+                    status_code=400,
+                    content=ResponseDTO(
+                        message="Missing required fields"
+                    ).model_dump(mode="json"),
+                )
+
     team_type_str = exec_form_request.teamType.value if isinstance(exec_form_request.teamType, TeamType) else str(exec_form_request.teamType)
 
     print_formatter(
