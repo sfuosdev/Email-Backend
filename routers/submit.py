@@ -9,6 +9,7 @@ from enums.team_type import TeamType
 from models.dto import ExecAppFormDTO
 from models.request import ExecFormRequest
 from models.response import ResponseDTO
+from services.smtp_email_sender import send_application_email
 
 router = APIRouter(prefix="/api/submit", tags=["submit"])
 
@@ -106,6 +107,17 @@ async def receive_exec_form(form_dto: ExecAppFormDTO):
         processed_questions,
     )
 
+    send_application_email(
+        full_name=exec_form_request.fullName,
+        sfu_email=exec_form_request.email,
+        student_id=exec_form_request.studentId,
+        year_of_study=exec_form_request.yearOfStudy,
+        faculty=exec_form_request.faculty,
+        major=exec_form_request.major,
+        co_op=exec_form_request.isCoop,
+        team_type=team_type_str,
+    )
+
     return ResponseDTO(
         message="Submission received successfully",
         content=exec_form_request.model_dump(mode="json"),
@@ -115,3 +127,4 @@ async def receive_exec_form(form_dto: ExecAppFormDTO):
 @router.post("/project-proposal")
 async def receive_project_proposal_form(payload: Dict[str, Any]):
     return JSONResponse(status_code=400, content="Under Construction")
+
