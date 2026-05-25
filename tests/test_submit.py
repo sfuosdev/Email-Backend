@@ -1,4 +1,5 @@
-# import pytest
+from unittest.mock import patch
+
 from fastapi.testclient import TestClient
 
 from main import app
@@ -6,7 +7,8 @@ from main import app
 client = TestClient(app)
 
 
-def test_submit_exec_form_success():
+@patch("routers.submit.send_application_email")
+def test_submit_exec_form_success(mock_send_application_email):
     # Test data for a successful submission
     test_data = {
         "fullName": "John Doe",
@@ -28,9 +30,20 @@ def test_submit_exec_form_success():
     assert "message" in data
     assert data["message"] == "Submission received successfully"
     assert "content" in data
+    mock_send_application_email.assert_called_once_with(
+        full_name="John Doe",
+        sfu_email="john.doe@example.com",
+        student_id=12345678,
+        year_of_study=3,
+        faculty="Engineering",
+        major="Computer Science",
+        co_op=False,
+        team_type="EVENT",
+    )
 
 
-def test_submit_exec_form_invalid_student_id():
+@patch("routers.submit.send_application_email")
+def test_submit_exec_form_invalid_student_id(mock_send_application_email):
     # Test with invalid student ID
     test_data = {
         "fullName": "Jane Doe",
@@ -50,9 +63,11 @@ def test_submit_exec_form_invalid_student_id():
     data = response.json()
     assert "message" in data
     assert "Invalid number format" in data["message"]
+    mock_send_application_email.assert_not_called()
 
 
-def test_submit_exec_form_coop_term():
+@patch("routers.submit.send_application_email")
+def test_submit_exec_form_coop_term(mock_send_application_email):
     # Test with coop term yes
     test_data = {
         "fullName": "Alice Smith",
@@ -72,9 +87,11 @@ def test_submit_exec_form_coop_term():
     data = response.json()
     assert "message" in data
     assert "co-op term" in data["message"]
+    mock_send_application_email.assert_not_called()
 
 
-def test_submit_exec_form_invalid_team():
+@patch("routers.submit.send_application_email")
+def test_submit_exec_form_invalid_team(mock_send_application_email):
     # Test with invalid team type
     test_data = {
         "fullName": "Bob Johnson",
@@ -94,8 +111,11 @@ def test_submit_exec_form_invalid_team():
     data = response.json()
     assert "message" in data
     assert "Invalid team type" in data["message"]
+    mock_send_application_email.assert_not_called()
 
-def test_submit_exec_form_missing_fields():
+
+@patch("routers.submit.send_application_email")
+def test_submit_exec_form_missing_fields(mock_send_application_email):
     # Test for when one component is missing
     test_data = {
         "fullName": "Charlie Brown",
@@ -114,3 +134,4 @@ def test_submit_exec_form_missing_fields():
     data = response.json()
     assert "message" in data
     assert "Missing required fields" in data["message"]
+    mock_send_application_email.assert_not_called()
