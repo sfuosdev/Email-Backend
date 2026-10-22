@@ -38,13 +38,13 @@ Questions and Answers:
 
 def send_email_message(msg: EmailMessage) -> None:
     resend.api_key = RESEND_API_KEY
-    resend.messages.send(
-        from_email=msg["From"],
-        to_email=msg["To"],
-        subject=msg["Subject"],
-        text=msg.get_content(),
-        reply_to=msg["Reply-To"]
-    )
+    resend.Emails.send({
+        "from": str(msg["From"]),
+        "to": [str(msg["To"])],
+        "subject": str(msg["Subject"]),
+        "text": msg.get_content(),
+        "reply_to": str(msg["Reply-To"]),
+    })
 
 def send_application_email(
         full_name: str,

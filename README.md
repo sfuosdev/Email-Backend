@@ -1,4 +1,4 @@
-﻿# OSDev Email Backend
+# OSDev Email Backend
 
 Receives executive applications from the club website and emails them to executives.
 
@@ -27,7 +27,7 @@ sfuosdev.com (GitHub Pages)
 
 - [ ] Add Resend's Python SDK to `requirements.txt`.
 - [ ] Read the configuration below in `core/config.py` and update `.env.example` with placeholders.
-- [ ] Adapt `services/smtp_email_sender.py` to send through the Resend HTTPS API instead of `smtplib`.
+- [ ] Adapt `services/email_sender.py` to send through the Resend HTTPS API instead of `smtplib`.
 - [ ] Preserve the `send_application_email(...)` interface where practical, the existing API route, and the website's request format.
 - [ ] Include personal information and all team questions and answers; keep the applicant's email as Reply-To.
 - [ ] Handle provider failures and return success only after Resend accepts the request.

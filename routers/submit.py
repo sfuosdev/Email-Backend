@@ -9,7 +9,7 @@ from enums.team_type import TeamType
 from models.dto import ExecAppFormDTO
 from models.request import ExecFormRequest
 from models.response import ResponseDTO
-from services.smtp_email_sender import send_application_email
+from services.email_sender import send_application_email
 
 router = APIRouter(prefix="/api/submit", tags=["submit"])
 
