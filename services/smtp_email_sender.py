@@ -1,3 +1,4 @@
+from typing import Dict
 from email.message import EmailMessage
 import smtplib
 from core.config import SMTP_FROM, SMTP_TO
@@ -13,12 +14,14 @@ def build_email_message(
         major: str,
         co_op: bool,
         team_type: str,
+        questions: Dict[str, str]
 ) -> EmailMessage:
     msg = EmailMessage()
     msg["Subject"] = f"New Executive Application: {full_name} - {team_type}"
     msg["From"] = SMTP_FROM
     msg["To"] = SMTP_TO
     msg["Reply-To"] = sfu_email
+    question_answers = "\n".join([f"{question}: {answer}" for question, answer in questions.items()])
 
     msg.set_content(f"""\
 Full Name: {full_name}
@@ -29,6 +32,8 @@ Major: {major}
 Faculty: {faculty}
 Co-op: {"Yes" if co_op else "No"}
 Team Type: {team_type}
+Questions and Answers:
+{question_answers}
 """)
     
     return msg
@@ -56,6 +61,7 @@ def send_application_email(
         major: str,
         co_op: bool,
         team_type: str,
+        questions: Dict[str, str]
 ) -> None:
     msg = build_email_message(
         full_name=full_name,
@@ -65,7 +71,8 @@ def send_application_email(
         faculty=faculty,
         major=major,
         co_op=co_op,
-        team_type=team_type
+        team_type=team_type,
+        questions=questions
     )
     send_email_message(msg)
 

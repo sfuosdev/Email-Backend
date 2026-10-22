@@ -39,6 +39,7 @@ def test_submit_exec_form_success(mock_send_application_email):
         major="Computer Science",
         co_op=False,
         team_type="EVENT",
+        questions={},
     )
 
 
