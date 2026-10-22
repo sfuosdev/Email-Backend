@@ -1,9 +1,7 @@
 from typing import Dict
 from email.message import EmailMessage
-import smtplib
-from core.config import SMTP_FROM, SMTP_TO
-from core.config import SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, SMTP_USE_TLS, SMTP_USE_SSL
-
+import resend
+from core.config import RESEND_API_KEY, EMAIL_FROM, EMAIL_TO
 
 def build_email_message(
         full_name: str,
@@ -18,8 +16,8 @@ def build_email_message(
 ) -> EmailMessage:
     msg = EmailMessage()
     msg["Subject"] = f"New Executive Application: {full_name} - {team_type}"
-    msg["From"] = SMTP_FROM
-    msg["To"] = SMTP_TO
+    msg["From"] = EMAIL_FROM
+    msg["To"] = EMAIL_TO
     msg["Reply-To"] = sfu_email
     question_answers = "\n".join([f"{question}: {answer}" for question, answer in questions.items()])
 
@@ -39,18 +37,14 @@ Questions and Answers:
     return msg
 
 def send_email_message(msg: EmailMessage) -> None:
-    if SMTP_USE_SSL:
-        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
-            if SMTP_USERNAME and SMTP_PASSWORD:
-                server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            server.send_message(msg)
-    else:
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
-            if SMTP_USE_TLS:
-                server.starttls()
-            if SMTP_USERNAME and SMTP_PASSWORD:
-                server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            server.send_message(msg)
+    resend.api_key = RESEND_API_KEY
+    resend.messages.send(
+        from_email=msg["From"],
+        to_email=msg["To"],
+        subject=msg["Subject"],
+        text=msg.get_content(),
+        reply_to=msg["Reply-To"]
+    )
 
 def send_application_email(
         full_name: str,
