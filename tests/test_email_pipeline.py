@@ -3,7 +3,6 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from main import app
-from services.email_sender import send_application_email
 
 
 def test_application_answers_reach_email_body():
@@ -18,13 +17,23 @@ def test_application_answers_reach_email_body():
         "firstChoiceTeam": "technology",
         "questions": {"tech_q1": "This answer must appear in the email."},
     }
-    with patch("routers.submit.send_application_email", wraps=send_application_email), patch(
-        "services.email_sender.send_email_message"
-    ) as smtp_send:
+    with patch("services.email_sender.EMAIL_FROM", "applications@example.com"), patch(
+        "services.email_sender.EMAIL_TO", "executive@example.com"
+    ), patch("services.email_sender.RESEND_API_KEY", "test-key"), patch(
+        "services.email_sender.resend.api_key", ""
+    ), patch(
+        "services.email_sender.resend.Emails.send", return_value={"id": "test-email"}
+    ) as resend_send:
         response = TestClient(app).post("/api/submit/exec-form", json=payload)
+
     assert response.status_code == 200
-    smtp_send.assert_called_once()
-    message = smtp_send.call_args.args[0]
-    assert "This answer must appear in the email." in message.get_content()
-    assert "Questions and Answers:" in message.get_content()
-    assert message["Reply-To"] == payload["email"]
+    resend_send.assert_called_once()
+    message = resend_send.call_args.args[0]
+    assert message["from"] == "applications@example.com"
+    assert message["to"] == ["executive@example.com"]
+    assert message["reply_to"] == payload["email"]
+    assert message["subject"] == "New Executive Application: Connection Test - TECHNOLOGY"
+    assert "Full Name: Connection Test" in message["text"]
+    assert "Student ID: 12345678" in message["text"]
+    assert "This answer must appear in the email." in message["text"]
+    assert "Questions and Answers:" in message["text"]

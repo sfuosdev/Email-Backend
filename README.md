@@ -4,9 +4,9 @@ Receives executive applications from the club website and emails them to executi
 
 ## Plan: Render Free + Resend HTTPS API
 
-Keep the existing **Python/FastAPI backend and Docker setup**. Replace only the SMTP email delivery implementation with Resend's HTTPS API. No Cloudflare Worker or backend rewrite is planned.
+The existing **Python/FastAPI backend and Docker setup** send application emails through Resend's HTTPS API. No Cloudflare Worker is required.
 
-This is a roadmap; updating this README does not implement the Resend integration or deploy the service.
+The Resend integration is implemented. The checklist below covers account setup, local verification, and deployment.
 
 ```text
 sfuosdev.com (GitHub Pages)
@@ -23,17 +23,17 @@ sfuosdev.com (GitHub Pages)
 - [ ] Add and verify a sending domain, such as `sfuosdev.com`, using the DNS records provided by Resend.
 - [ ] Create a sending API key and choose the sender and recipient addresses.
 
-### 2. Update email delivery
+### 2. Configure email delivery
 
-- [ ] Add Resend's Python SDK to `requirements.txt`.
-- [ ] Read the configuration below in `core/config.py` and update `.env.example` with placeholders.
-- [ ] Adapt `services/email_sender.py` to send through the Resend HTTPS API instead of `smtplib`.
-- [ ] Preserve the `send_application_email(...)` interface where practical, the existing API route, and the website's request format.
-- [ ] Include personal information and all team questions and answers; keep the applicant's email as Reply-To.
+- [x] Add Resend's Python SDK to `requirements.txt`.
+- [x] Read the configuration below in `core/config.py` and provide `.env.example` placeholders.
+- [x] Send through the Resend HTTPS API in `services/email_sender.py`.
+- [x] Preserve `send_application_email(...)`, the existing API route, and the website's request format.
+- [x] Include personal information and team questions and answers; keep the applicant's email as Reply-To.
 - [ ] Handle provider failures and return success only after Resend accepts the request.
-- [ ] Update tests to mock Resend and verify the complete email content.
+- [x] Mock the Resend SDK call and verify the outgoing message in tests.
 
-Planned local `.env` settings:
+Local `.env` settings:
 
 ```dotenv
 RESEND_API_KEY=YOUR_RESEND_API_KEY
@@ -41,13 +41,13 @@ EMAIL_FROM=applications@sfuosdev.com
 EMAIL_TO=executive@example.com
 ```
 
-These settings must be implemented in the Python code; adding them alone does not activate Resend. Use a verified-domain address for `EMAIL_FROM`. Recipients can continue using Gmail. SMTP settings and Gmail app passwords are not needed for this sending method.
+Set a valid API key and use a verified-domain address for `EMAIL_FROM`. Recipients can continue using Gmail.
 
 Do not commit `.env` or API keys. Keep the Resend key only in the backend environment.
 
 ### 3. Test locally with Docker
 
-After implementing the sender and configuration:
+After saving your local configuration:
 
 ```powershell
 docker compose up --build -d
@@ -80,7 +80,7 @@ If `VITE_ENDPOINT` is also set, it takes priority. Automated tests should mock d
 
 Render builds the Dockerfile; Docker Compose remains the local development tool. Local `.env` values are not automatically copied to Render.
 
-The HTTPS API avoids Render Free's SMTP port restrictions. No SMTP port connectivity test is needed for this plan.
+Email delivery uses outbound HTTPS requests.
 
 ### 5. Connect the live website
 
