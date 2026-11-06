@@ -19,9 +19,9 @@ sfuosdev.com (GitHub Pages)
 
 ### 1. Set up Resend
 
-- [ ] Create a club-managed Resend account.
-- [ ] Add and verify a sending domain, such as `sfuosdev.com`, using the DNS records provided by Resend.
-- [ ] Create a sending API key and choose the sender and recipient addresses.
+- [x] Create a club-managed Resend account.
+- [x] Add and verify a sending domain, such as `sfuosdev.com`, using the DNS records provided by Resend.
+- [x] Create a sending API key and choose the sender and recipient addresses.
 
 ### 2. Configure email delivery
 
