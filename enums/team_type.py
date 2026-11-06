@@ -4,7 +4,6 @@ from enum import Enum
 class TeamType(str, Enum):
     EVENT = "EVENT"
     TECHNOLOGY = "TECHNOLOGY"
-    STRATEGY = "STRATEGY"
 
     @classmethod
     def from_string(cls, team: str) -> "TeamType":

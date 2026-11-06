@@ -78,7 +78,7 @@ def test_submit_exec_form_coop_term(mock_send_application_email):
         "faculty": "Arts",
         "major": "Psychology",
         "coopTerm": "yes",
-        "firstChoiceTeam": "STRATEGY",
+        "firstChoiceTeam": "EVENT",
         "questions": {}
     }
 
@@ -126,7 +126,7 @@ def test_submit_exec_form_missing_fields(mock_send_application_email):
         "faculty": "  ",
         "major": "Finance",
         "coopTerm": "no",
-        "firstChoiceTeam": "STRATEGY",
+        "firstChoiceTeam": "EVENT",
         "questions": {}
     }
 
