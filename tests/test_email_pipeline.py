@@ -15,6 +15,7 @@ def test_application_answers_reach_email_body():
         "major": "Computer Science",
         "coopTerm": "no",
         "firstChoiceTeam": "technology",
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": {"tech_q9": "This answer must appear in the email."},
     }
     with patch("services.email_sender.EMAIL_FROM", "applications@example.com"), patch(
@@ -38,3 +39,5 @@ def test_application_answers_reach_email_body():
     assert "This answer must appear in the email." in message["text"]
     assert "Questions and Answers:" in message["text"]
     assert "What is your Discord user name in our OS Dev Discord server?" in message["text"]
+
+    assert message["attachments"] == [payload["resume"]]

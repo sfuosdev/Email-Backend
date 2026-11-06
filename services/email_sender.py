@@ -1,6 +1,7 @@
 from typing import Dict
 from email.message import EmailMessage
 import resend
+from models.dto import ResumeAttachment
 from core.config import RESEND_API_KEY, EMAIL_FROM, EMAIL_TO
 
 def build_email_message(
@@ -36,7 +37,7 @@ Questions and Answers:
     
     return msg
 
-def send_email_message(msg: EmailMessage) -> None:
+def send_email_message(msg: EmailMessage, resume: ResumeAttachment) -> None:
     resend.api_key = RESEND_API_KEY
     resend.Emails.send({
         "from": str(msg["From"]),
@@ -44,6 +45,7 @@ def send_email_message(msg: EmailMessage) -> None:
         "subject": str(msg["Subject"]),
         "text": msg.get_content(),
         "reply_to": str(msg["Reply-To"]),
+        "attachments": [{"filename": resume.filename, "content": resume.content}],
     })
 
 def send_application_email(
@@ -55,7 +57,8 @@ def send_application_email(
         major: str,
         co_op: bool,
         team_type: str,
-        questions: Dict[str, str]
+        questions: Dict[str, str],
+        resume: ResumeAttachment,
 ) -> None:
     msg = build_email_message(
         full_name=full_name,
@@ -68,6 +71,6 @@ def send_application_email(
         team_type=team_type,
         questions=questions
     )
-    send_email_message(msg)
+    send_email_message(msg, resume)
 
 

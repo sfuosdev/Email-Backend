@@ -116,7 +116,8 @@ async def receive_exec_form(form_dto: ExecAppFormDTO):
         major=exec_form_request.major,
         co_op=exec_form_request.isCoop,
         team_type=team_type_str,
-        questions=processed_questions
+        questions=processed_questions,
+        resume=form_dto.resume,
     )
 
     return ResponseDTO(

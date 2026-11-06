@@ -27,6 +27,7 @@ def test_optional_questions_can_be_left_blank(team, required_answers, optional_k
         "major": "Computer Science",
         "coopTerm": "no",
         "firstChoiceTeam": team,
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": questions,
     }
     with patch("routers.submit.send_application_email") as send_email:

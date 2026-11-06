@@ -1,3 +1,4 @@
+from models.dto import ResumeAttachment
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
@@ -19,6 +20,7 @@ def test_submit_exec_form_success(mock_send_application_email):
         "major": "Computer Science",
         "coopTerm": "no",
         "firstChoiceTeam": "EVENT",
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": {
         }
     }
@@ -40,6 +42,7 @@ def test_submit_exec_form_success(mock_send_application_email):
         co_op=False,
         team_type="EVENT",
         questions={},
+        resume=ResumeAttachment(filename="resume.pdf", content="JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="),
     )
 
 
@@ -55,6 +58,7 @@ def test_submit_exec_form_invalid_student_id(mock_send_application_email):
         "major": "Biology",
         "coopTerm": "no",
         "firstChoiceTeam": "TECHNOLOGY",
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": {}
     }
 
@@ -79,6 +83,7 @@ def test_submit_exec_form_coop_term(mock_send_application_email):
         "major": "Psychology",
         "coopTerm": "yes",
         "firstChoiceTeam": "EVENT",
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": {}
     }
 
@@ -103,6 +108,7 @@ def test_submit_exec_form_invalid_team(mock_send_application_email):
         "major": "Finance",
         "coopTerm": "no",
         "firstChoiceTeam": "invalid_team",
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": {}
     }
 
@@ -127,6 +133,7 @@ def test_submit_exec_form_missing_fields(mock_send_application_email):
         "major": "Finance",
         "coopTerm": "no",
         "firstChoiceTeam": "EVENT",
+        "resume": {"filename": "resume.pdf", "content": "JVBERi0xLjQKVGVzdCByZXN1bWUKJSVFT0Y="},
         "questions": {}
     }
 
